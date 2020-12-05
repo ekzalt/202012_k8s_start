@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hello-minikube
+  labels:
+    name: hello-minikube
+    owner: Alex
+    env: prod
+spec:
+  containers:
+    - name: hello-minikube
+      # image can be changed without deleting pod
+      image: k8s.gcr.io/echoserver:1.4
+      resources:
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
+      ports:
+        - containerPort: 8080

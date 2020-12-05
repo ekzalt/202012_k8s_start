@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-deploy
+  labels:
+    owner: Alex
+    env: prod
+spec:
+  selector:
+    matchLabels:
+      # selector.matchLabels should be equal to template.metadata.labels
+      app: myapp
+  template:
+    metadata:
+      labels:
+        # selector.matchLabels should be equal to template.metadata.labels
+        app: myapp
+    spec:
+      containers:
+        - name: myapp-container
+          # image can be changed without deleting pod
+          image: k8s.gcr.io/echoserver:1.4
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 8080
